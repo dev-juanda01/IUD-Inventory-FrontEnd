@@ -25,6 +25,7 @@ export default function Tipos() {
       setData(json);
 
       console.log("datos", data);
+      console.log(json);
     } catch (error) {}
   };
 
@@ -100,6 +101,7 @@ export default function Tipos() {
 
   useEffect(() => {
     listTypes();
+    console.log(data);
   }, [enpoint]);
 
   return (
