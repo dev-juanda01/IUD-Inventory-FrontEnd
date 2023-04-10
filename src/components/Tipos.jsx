@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getDoc, postDoc, putDoc, deleteDoc } from "../services/useAxiosHelp";
+import { getDocs, postDoc, putDoc, deleteDoc } from "../services/useAxiosHelp";
 import ButtonAgregar from "./ButtonAgregar";
 import FormSearch from "./FormSearch";
 import Logo from "./Logo";
@@ -14,7 +14,7 @@ export default function Tipos() {
 
   const listTypes = async () => {
     try {
-      let res = await getDoc(enpoint);
+      let res = await getDocs(enpoint);
       let json = await res.data;
       setData(json);
 

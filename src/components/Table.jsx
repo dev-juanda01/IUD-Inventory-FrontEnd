@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TableRow from "./TableRow";
 
 export default function Table({ datos, setDataToEdit, deleteType }) {
@@ -9,7 +9,9 @@ export default function Table({ datos, setDataToEdit, deleteType }) {
     keysTypes.includes("email") && setHasEmail(true);
   };
 
-  validateHasEmail();
+  useEffect(() => {
+    validateHasEmail();
+  }, []);
 
   return (
     <>

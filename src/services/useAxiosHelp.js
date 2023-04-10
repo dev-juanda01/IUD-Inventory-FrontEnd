@@ -1,7 +1,7 @@
 import axios from "axios";
 import { axiosConfig } from "../helpers/axiosConfig";
 
-const getDoc = (enpoint) => {
+const getDocs = (enpoint) => {
   return axiosConfig.get(enpoint, {
     headers: {
       "Content-Type": "application/json",
@@ -9,6 +9,13 @@ const getDoc = (enpoint) => {
   });
 };
 
+const getDoc = (enpoint, nombre) => {
+  return axiosConfig.get(`${enpoint}?nombre=${nombre}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
 const postDoc = (enpoint, data) => {
   return axiosConfig.post(enpoint, data, {
     headers: {
@@ -33,4 +40,4 @@ const deleteDoc = (enpoint, id) => {
   });
 };
 
-export { getDoc, postDoc, putDoc, deleteDoc };
+export { getDocs, getDoc, postDoc, putDoc, deleteDoc };
