@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { getDocs, postDoc, putDoc, deleteDoc } from "../services/useAxiosHelp";
+import {
+  getDocs,
+  getDoc,
+  postDoc,
+  putDoc,
+  deleteDoc,
+} from "../services/useAxiosHelp";
 import ButtonAgregar from "./ButtonAgregar";
 import FormSearch from "./FormSearch";
 import Logo from "./Logo";
@@ -20,6 +26,18 @@ export default function Tipos() {
 
       console.log("datos", data);
     } catch (error) {}
+  };
+
+  const listType = async (nombre) => {
+    try {
+      console.log(nombre);
+      const res = await getDoc(enpoint, nombre);
+      setData(res.data);
+      console.log(res);
+    } catch (error) {
+      alert(error.response.data.message);
+      console.log(error);
+    }
   };
 
   const createType = async (datos) => {
@@ -91,7 +109,7 @@ export default function Tipos() {
         <h2> Tipos de equipos</h2>
         <div className="header-types">
           <ButtonAgregar />
-          <FormSearch />
+          <FormSearch listType={listType} />
         </div>
         {data && (
           <Table
