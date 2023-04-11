@@ -91,3 +91,20 @@
   display: flex;
   justify-content: space-between;
 }
+/* Cards de inventarios */
+.cards {
+  margin-top: 1rem;
+}
+.card-text {
+  margin-bottom: 0.4rem;
+}
+.col img {
+  height: 100%;
+}
+/* Lista de opciones de la card */
+.dropdown-item.edit:active {
+  background-color: #0dcaf0;
+}
+.dropdown-item.delete:active {
+  background-color: #ffc107;
+}

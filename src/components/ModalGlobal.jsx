@@ -1,9 +1,12 @@
 import React from "react";
+import FormInventario from "./FormInventario";
 import FormTipos from "./FormTipos";
 
 export default function ModalGlobal({
-  createType,
-  updateType,
+  module,
+  create,
+  update,
+  data,
   dataToEdit,
   setDataToEdit,
 }) {
@@ -31,12 +34,15 @@ export default function ModalGlobal({
               ></button>
             </div>
             <div className="modal-body">
-              <FormTipos
-                createType={createType}
-                updateType={updateType}
-                dataToEdit={dataToEdit}
-                setDataToEdit={setDataToEdit}
-              />
+              {module === "tipos" && (
+                <FormTipos
+                  createType={create}
+                  updateType={update}
+                  dataToEdit={dataToEdit}
+                  setDataToEdit={setDataToEdit}
+                />
+              )}
+              {module === "inventarios" && <FormInventario data={data} />}
             </div>
           </div>
         </div>

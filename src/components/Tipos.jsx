@@ -121,8 +121,9 @@ export default function Tipos() {
           />
         )}
         <ModalGlobal
-          createType={createType}
-          updateType={updateType}
+          module="tipos"
+          create={createType}
+          update={updateType}
           dataToEdit={dataToEdit}
           setDataToEdit={setDataToEdit}
         />
