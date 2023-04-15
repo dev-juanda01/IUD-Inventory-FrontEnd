@@ -1,26 +1,76 @@
 import React, { useState, useEffect } from "react";
-import { getDocs, postDoc, putDoc, deleteDoc } from "../services/useAxiosHelp";
+import {
+  getDocs,
+  getDoc,
+  postDoc,
+  putDoc,
+  deleteDoc,
+} from "../services/useAxiosHelp";
 import ButtonAgregar from "./ButtonAgregar";
 import FormSearch from "./FormSearch";
 import Logo from "./Logo";
 import ModalGlobal from "./ModalGlobal";
+import Refresh from "./Refresh";
+import SpinnerRenderUI from "./SpinnerRenderUI";
 import Table from "./Table";
+import Alert from "./Alert";
 
-export default function Estados() {
+export default function Estados({ theme }) {
   const [data, setData] = useState(null);
   const [dataToEdit, setDataToEdit] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [refresh, setRefresh] = useState(false);
+  const [error, setError] = useState(null);
 
   const enpoint = "estadoequipos";
+
+  const changeRefresh = () => {
+    setIsLoading(true);
+    setData(null);
+    setRefresh(!refresh);
+  };
 
   const listStatus = async () => {
     try {
       let res = await getDocs(enpoint);
       let json = await res.data;
       setData(json);
+      setIsLoading(false);
+    } catch (error) {
+      setError(error);
+      setIsLoading(false);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error}`,
+      });
+    }
+  };
 
-      console.log("estados", data);
-      console.log(json);
-    } catch (error) {}
+  const listState = async (nombre) => {
+    try {
+      setIsLoading(true);
+      const res = await getDoc(enpoint, nombre);
+
+      if (res.data.length === 0 || !nombre) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `El estado ${nombre} no existe`,
+        });
+        setIsLoading(false);
+      } else {
+        setData(res.data);
+        setIsLoading(false);
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error.response.data.message}`,
+      });
+      setIsLoading(false);
+    }
   };
 
   const createStatus = async (datos) => {
@@ -32,21 +82,18 @@ export default function Estados() {
       datos.estado = datos.estado === "true" ? true : false;
 
       const res = await postDoc(enpoint, datos);
-      setData([...data, res.data.nuevoEstadoEquipo]);
-      alert("Estado creado correctamente");
-
-      console.log(data, res);
+      setData([...data, res.data]);
+      Swal.fire("Excelente!", "Estado creado correctamente!", "success");
     } catch (error) {
       let { response } = error;
       if (!response.status) return;
-      response.status == 409 && alert(response.data.message);
-      console.log(error);
+      response.status == 409 &&
+        Swal.fire("Oops...!", `${response.data.message}`, "error");
     }
   };
 
   const updateStatus = async (datos) => {
     try {
-      console.log(datos);
       delete datos.fechaActualizacion;
       delete datos.fechaCreacion;
 
@@ -59,52 +106,67 @@ export default function Estados() {
         el._id === statusUpdate._id ? statusUpdate : el
       );
       setData(dataUpdate);
-      console.log(res);
+      Swal.fire("Excelente!", "Estado actualizado correctamente!", "success");
     } catch (error) {
-      console.log(error);
+      Swal.fire("Oops...!", `${error.response.data.message}`, "error");
     }
   };
 
   const deleteStatus = async (id) => {
     try {
-      console.log(id);
-      const isDelete = confirm("¿Estas seguro de eliminar este estado?");
-
-      if (isDelete) {
-        const res = await deleteDoc(enpoint, id);
-        setData(data.filter((el) => el._id !== id));
-        console.log("nueva data", data);
-        alert(res.data.message);
-      }
+      Swal.fire({
+        title: "¿Estas seguro de eliminar este estado?",
+        text: "Este estado sera eliminado de la base de datos",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteDoc(enpoint, id).then((res) => {
+            setData(data.filter((el) => el._id !== id));
+          });
+          Swal.fire("Eliminado!", "Estado eliminado correctamente", "success");
+        }
+      });
     } catch (error) {
-      console.log(error);
+      Swal.fire("Oops...!", `${error.response.data.message}`, "error");
     }
   };
 
   useEffect(() => {
     listStatus();
-    console.log(data);
-  }, [enpoint]);
+  }, [refresh]);
 
   return (
     <>
       <Logo />
-      <div>
+      <div className="container-module">
         <h2> Estados de equipos</h2>
         <div className="header-types">
           <ButtonAgregar />
-          <FormSearch />
+          <div className="others-search" style={{ display: "flex" }}>
+            <Refresh changeRefresh={changeRefresh} />
+            <FormSearch ph="Buscar estado" listModule={listState} />
+          </div>
         </div>
-        {data && (
-          <Table
-            datos={data}
-            setDataToEdit={setDataToEdit}
-            deleteStatus={deleteStatus}
-          />
+        {error && <Alert />}
+        {isLoading ? (
+          <SpinnerRenderUI theme={theme} />
+        ) : (
+          data && (
+            <Table
+              datos={data}
+              setDataToEdit={setDataToEdit}
+              deleteModule={deleteStatus}
+            />
+          )
         )}
         <ModalGlobal
-          createStatus={createStatus}
-          updateStatus={updateStatus}
+          module="estados"
+          create={createStatus}
+          update={updateStatus}
           dataToEdit={dataToEdit}
           setDataToEdit={setDataToEdit}
         />

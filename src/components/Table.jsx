@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TableRow from "./TableRow";
 
-export default function Table({ datos, setDataToEdit, deleteType }) {
+export default function Table({ datos, setDataToEdit, deleteModule }) {
   const [hasEmail, setHasEmail] = useState(false);
 
   const validateHasEmail = () => {
@@ -34,7 +34,7 @@ export default function Table({ datos, setDataToEdit, deleteType }) {
               id={index + 1}
               el={el}
               setDataToEdit={setDataToEdit}
-              deleteType={deleteType}
+              deleteModule={deleteModule}
             />
           ))}
         </tbody>

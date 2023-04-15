@@ -9,9 +9,9 @@ const initialForm = {
   fechaActualizacion: "",
 };
 
-export default function FormTipos({
-  createType,
-  updateType,
+export default function FormEstados({
+  createStatus,
+  updateStatus,
   dataToEdit,
   setDataToEdit,
 }) {
@@ -47,9 +47,9 @@ export default function FormTipos({
       return alert("Datos incompletos");
 
     if (form.id === null) {
-      createType(form);
+      createStatus(form);
     } else {
-      updateType(form);
+      updateStatus(form);
     }
 
     handleReset();
@@ -76,10 +76,11 @@ export default function FormTipos({
             ref={$nombre}
           >
             <option value="default" disabled>
-              Selecciona un tipo
+              Selecciona un nombre de estado
             </option>
-            <option value="COMPUTO">Computo</option>
-            <option value="MOVILES">Moviles</option>
+            <option value="EN USO">En Uso</option>
+            <option value="EN BODEGA">En Bodega</option>
+            <option value="DEPRECIADO">Depreciado</option>
           </select>
         </div>
         <br />

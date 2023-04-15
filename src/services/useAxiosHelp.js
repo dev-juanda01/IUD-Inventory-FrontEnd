@@ -16,6 +16,15 @@ const getDoc = (enpoint, nombre) => {
     },
   });
 };
+
+const getDocSerial = (enpoint, serial) => {
+  return axiosConfig.get(`${enpoint}?serial=${serial}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
 const postDoc = (enpoint, data) => {
   return axiosConfig.post(enpoint, data, {
     headers: {
@@ -40,4 +49,4 @@ const deleteDoc = (enpoint, id) => {
   });
 };
 
-export { getDocs, getDoc, postDoc, putDoc, deleteDoc };
+export { getDocs, getDoc, getDocSerial, postDoc, putDoc, deleteDoc };

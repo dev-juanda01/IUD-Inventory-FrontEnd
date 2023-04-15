@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import React from "react";
 
-export default function TableRow({ id, el, setDataToEdit, deleteType }) {
+export default function TableRow({ id, el, setDataToEdit, deleteModule }) {
   let { nombre, estado, email, fechaCreacion, fechaActualizacion } = el;
 
   return (
@@ -26,7 +26,7 @@ export default function TableRow({ id, el, setDataToEdit, deleteType }) {
         <button
           type="button"
           className="btn btn-warning"
-          onClick={() => deleteType(el._id)}
+          onClick={() => deleteModule(el._id)}
         >
           Eliminar
         </button>

@@ -9,23 +9,35 @@ import Marcas from "../components/Marcas";
 import Usuarios from "../components/Usuarios";
 import Inventarios from "../components/Inventarios";
 import SingleColorBar from "../components/SingleColorBar";
+import Footer from "../components/Footer";
 
-export default function AppRouter() {
+export default function AppRouter({ darkMode, lightMode, theme, setTheme }) {
   return (
     <>
-      <OffCanvas />
-      <ColorPage />
-      <SingleColorBar />
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/tipos" element={<Tipos />} />
-          <Route path="/estados" element={<Estados />} />
-          <Route path="/marcas" element={<Marcas />} />
-          <Route path="/usuarios" element={<Usuarios />} />
-          <Route path="/inventarios" element={<Inventarios />} />
-        </Routes>
+      <div className="super-container">
+        <OffCanvas darkMode={darkMode} lightMode={lightMode} theme={theme} />
+        <ColorPage
+          darkMode={darkMode}
+          lightMode={lightMode}
+          theme={theme}
+          setTheme={setTheme}
+        />
+        <SingleColorBar />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/tipos" element={<Tipos theme={theme} />} />
+            <Route path="/estados" element={<Estados theme={theme} />} />
+            <Route path="/marcas" element={<Marcas theme={theme} />} />
+            <Route path="/usuarios" element={<Usuarios theme={theme} />} />
+            <Route
+              path="/inventarios"
+              element={<Inventarios theme={theme} />}
+            />
+          </Routes>
+        </div>
       </div>
+      <Footer />
     </>
   );
 }

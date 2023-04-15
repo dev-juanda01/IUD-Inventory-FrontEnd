@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function FormSearch({ listType }) {
+export default function FormSearch({ ph, listModule }) {
   const [nombre, setNombre] = useState("");
 
   const handleChange = (e) => {
@@ -10,7 +10,7 @@ export default function FormSearch({ listType }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    listType(nombre);
+    listModule(nombre);
   };
 
   return (
@@ -19,7 +19,7 @@ export default function FormSearch({ listType }) {
         <input
           className="form-control me-2"
           type="search"
-          placeholder="Buscar tipo"
+          placeholder={ph}
           aria-label="Search"
           value={nombre}
           onChange={handleChange}

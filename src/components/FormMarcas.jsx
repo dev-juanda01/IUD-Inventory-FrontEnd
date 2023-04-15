@@ -3,15 +3,15 @@ import dayjs from "dayjs";
 
 const initialForm = {
   id: null,
-  nombre: "default",
+  nombre: "",
   estado: "default",
   fechaCreacion: "",
   fechaActualizacion: "",
 };
 
-export default function FormTipos({
-  createType,
-  updateType,
+export default function FormMarcas({
+  createMark,
+  updateMark,
   dataToEdit,
   setDataToEdit,
 }) {
@@ -43,13 +43,13 @@ export default function FormTipos({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (form.nombre === "default" || form.estado === "default")
+    if (!form.nombre || form.estado === "default")
       return alert("Datos incompletos");
 
     if (form.id === null) {
-      createType(form);
+      createMark(form);
     } else {
-      updateType(form);
+      updateMark(form);
     }
 
     handleReset();
@@ -67,20 +67,16 @@ export default function FormTipos({
           <label htmlFor="nombre" className="form-label">
             Nombre
           </label>
-          <select
-            className="form-select"
-            aria-label="Default select example"
-            value={form.nombre}
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Escribe el nombre"
+            aria-label="default input example"
             name="nombre"
-            onChange={handleChange}
             ref={$nombre}
-          >
-            <option value="default" disabled>
-              Selecciona un tipo
-            </option>
-            <option value="COMPUTO">Computo</option>
-            <option value="MOVILES">Moviles</option>
-          </select>
+            value={form.nombre}
+            onChange={handleChange}
+          />
         </div>
         <br />
         <div>

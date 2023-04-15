@@ -1,6 +1,9 @@
 import React from "react";
+import FormEstados from "./FormEstados";
 import FormInventario from "./FormInventario";
+import FormMarcas from "./FormMarcas";
 import FormTipos from "./FormTipos";
+import FormUsuarios from "./FormUsuarios";
 
 export default function ModalGlobal({
   module,
@@ -9,6 +12,7 @@ export default function ModalGlobal({
   data,
   dataToEdit,
   setDataToEdit,
+  dataModules,
 }) {
   return (
     <>
@@ -42,7 +46,40 @@ export default function ModalGlobal({
                   setDataToEdit={setDataToEdit}
                 />
               )}
-              {module === "inventarios" && <FormInventario data={data} />}
+              {module === "estados" && (
+                <FormEstados
+                  createStatus={create}
+                  updateStatus={update}
+                  dataToEdit={dataToEdit}
+                  setDataToEdit={setDataToEdit}
+                />
+              )}
+              {module === "marcas" && (
+                <FormMarcas
+                  createMark={create}
+                  updateMark={update}
+                  dataToEdit={dataToEdit}
+                  setDataToEdit={setDataToEdit}
+                />
+              )}
+              {module === "usuarios" && (
+                <FormUsuarios
+                  createUser={create}
+                  updateUser={update}
+                  dataToEdit={dataToEdit}
+                  setDataToEdit={setDataToEdit}
+                />
+              )}
+              {module === "inventarios" && (
+                <FormInventario
+                  data={data}
+                  createInventory={create}
+                  updateInventory={update}
+                  dataToEdit={dataToEdit}
+                  setDataToEdit={setDataToEdit}
+                  dataModules={dataModules}
+                />
+              )}
             </div>
           </div>
         </div>

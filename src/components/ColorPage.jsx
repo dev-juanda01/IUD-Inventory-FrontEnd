@@ -1,24 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DarkMode from "./DarkMode";
 import LightMode from "./LightMode";
 
-export default function ColorPage() {
+export default function ColorPage({ darkMode, lightMode, theme, setTheme }) {
   const [mode, setMode] = useState(false);
-
-  const $html = document.documentElement,
-    $linksCanvas = document.querySelectorAll(".link-canvas");
-
-  if (mode) {
-    $html.setAttribute("data-bs-theme", "dark");
-    $linksCanvas.forEach((el) => (el.style.color = "#fff"));
-  } else {
-    $html.removeAttribute("data-bs-theme", "dark");
-    $linksCanvas.forEach((el) => (el.style.color = "#000"));
-  }
 
   const handleClickMode = (e) => {
     setMode(!mode);
+    if (mode) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
   };
+
+  useEffect(() => {
+    if (theme === "dark") {
+      darkMode();
+    } else {
+      lightMode();
+    }
+  }, [mode]);
 
   return (
     <>
@@ -27,7 +29,7 @@ export default function ColorPage() {
         className="btn btn-light btn-mode"
         onClick={handleClickMode}
       >
-        {mode ? <LightMode /> : <DarkMode />}
+        {theme === "dark" ? <LightMode /> : <DarkMode />}
       </button>
     </>
   );

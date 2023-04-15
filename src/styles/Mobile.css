@@ -1,0 +1,102 @@
+@media screen and (max-width: 600px) {
+  .main-logo {
+    width: 10rem;
+    margin-bottom: 1rem;
+  }
+  .container {
+    margin: 0;
+    padding: 0;
+    max-width: inherit;
+  }
+  .description-home {
+    padding: 0 2rem;
+    padding-right: 4.2rem;
+  }
+  .btn-mode {
+    bottom: 10vh;
+    right: 2vw;
+    left: auto;
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+  }
+  .btn-open {
+    width: 3rem;
+    height: 3rem;
+    right: 2vw;
+  }
+  .hamburger-inner {
+    left: 12%;
+    margin-top: 0;
+  }
+  .hamburger-inner,
+  .hamburger-inner::after,
+  .hamburger-inner::before {
+    width: 28px;
+    height: 4px;
+  }
+  .container-module {
+    width: 90%;
+    margin: auto;
+    font-size: 10px;
+  }
+  .container-module h2 {
+    font-size: 18px;
+  }
+  .container-module .btn {
+    width: 2rem;
+    font-size: 12px;
+  }
+  .header-types {
+    flex-direction: column;
+  }
+  .header-types .btn {
+    width: 4rem;
+    font-size: 12px;
+    margin-bottom: 2rem;
+  }
+  .header-types .others-search {
+    justify-content: start;
+    flex-direction: row-reverse;
+    height: 2rem;
+  }
+  .header-types .others-search .d-flex {
+    flex-direction: row-reverse;
+  }
+  .header-types .others-search .d-flex button {
+    margin: 0;
+  }
+  .carousel-inner {
+    height: 250px;
+  }
+  .table {
+    font-size: 9px;
+  }
+  .table .btn {
+    font-size: 5px;
+    text-align: center;
+    padding: 7px;
+  }
+  .table .btn-options .btn-info {
+    margin-right: 1px !important;
+  }
+  .table > :not(caption) > * > * {
+    padding: 0;
+  }
+  .cards-group {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .card {
+    width: 100%;
+  }
+  .card img {
+    width: 100%;
+  }
+  .container-inv {
+    margin: 2rem;
+  }
+}

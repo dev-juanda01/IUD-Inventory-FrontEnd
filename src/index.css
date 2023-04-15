@@ -5,6 +5,23 @@
   --red-color: #dd2432;
 }
 
+#root {
+  height: 100vh;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+/* .root {
+  min-height: 100%;
+  margin-bottom: -50px;
+} */
+/* Super contenedor */
+/* .super-container {
+  padding-bottom: 50px;
+  height: inherit;
+} */
 /* Botón de apertura de la hamburguesa */
 .btn-open {
   position: fixed;
@@ -15,6 +32,7 @@
   width: 4rem;
   height: 4rem;
   background-color: #f8f9fa;
+  z-index: 999;
 }
 
 /* Botón de modo claro, oscuro */
@@ -25,6 +43,7 @@
   border-radius: 50%;
   width: 4rem;
   height: 4rem;
+  z-index: 999;
 }
 .body-canvas {
   display: flex;
@@ -107,4 +126,37 @@
 }
 .dropdown-item.delete:active {
   background-color: #ffc107;
+}
+
+/* Tabla de datos */
+.table {
+  margin-top: 2rem;
+}
+/* Refresh botón */
+.refresh {
+  background: none;
+  border: none;
+}
+.refresh:hover {
+  background-color: #dcdcdc;
+  border-radius: 13px;
+}
+.refresh svg {
+  width: 1.5rem;
+}
+/* Formulario inventarios */
+.row-input {
+  display: flex;
+  justify-content: space-between;
+}
+.cards-group {
+  margin-top: 1rem;
+}
+.card {
+  box-shadow: -1px -1px 6px 0 rgba(20, 20, 20, 0.2);
+  transition: all 0.3s ease-out;
+}
+.card:hover {
+  cursor: pointer;
+  box-shadow: -1px -1px 20px 0 #0d6efd;
 }

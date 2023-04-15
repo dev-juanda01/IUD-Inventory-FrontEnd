@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import ColorBar from "./ColorBar";
 import OpenCanvas from "./OpenCanvas";
 
-export default function OffCanvas() {
+export default function OffCanvas({ darkMode, lightMode, theme }) {
+  const $linksCanvas = useRef();
+
   const handleClickClose = (e) => {
     const $hamburger = document.querySelector(".hamburger");
     $hamburger.classList.remove("is-active");
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (theme === "light") {
+        for (const element of $linksCanvas.current.children) {
+          element.style.color = "#000";
+        }
+      }
+
+      if (theme === "dark") {
+        for (const element of $linksCanvas.current.children) {
+          element.style.color = "#fff";
+        }
+      }
+    }, 1000);
+  }, []);
 
   return (
     <>
@@ -37,7 +55,7 @@ export default function OffCanvas() {
             onClick={handleClickClose}
           ></button>
         </div>
-        <div className="offcanvas-body body-canvas">
+        <div className="offcanvas-body body-canvas" ref={$linksCanvas}>
           <a className="link-canvas" href="tipos">
             Tipos de equipos
           </a>
