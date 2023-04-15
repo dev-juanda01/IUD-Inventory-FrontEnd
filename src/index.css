@@ -131,6 +131,7 @@ body {
 /* Tabla de datos */
 .table {
   margin-top: 2rem;
+  margin-bottom: 4rem;
 }
 /* Refresh botón */
 .refresh {

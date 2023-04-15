@@ -99,4 +99,9 @@
   .container-inv {
     margin: 2rem;
   }
+  .info-site {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
 }
