@@ -26,7 +26,13 @@ export default function DescripcionHome() {
         que necesiten acceder a la información del inventario. La API REST
         proporciona una serie de endpoints que permitirían a los desarrolladores
         realizar operaciones de lectura, escritura, actualización y eliminación
-        de datos relacionados con el inventario <a href="#">API IUDI</a>
+        de datos relacionados con el inventario{" "}
+        <a
+          href="https://iud-inventory-backend-production.up.railway.app/"
+          target="_blank"
+        >
+          API IUDI
+        </a>
       </p>
     </section>
   );
